@@ -44,6 +44,10 @@ pipeline {
             steps {
                 echo 'Deploying to production...'
                 // Add your deployment steps here
+                echo 'Triggering Vercel Deployment...'
+                withCredentials([string(credentialsId: 'vercel-deploy-hook', variable: 'VERCEL_DEPLOY_HOOK')]) {
+                    sh 'curl -X POST ${VERCEL_DEPLOY_HOOK}'
+                }
             }
         }
     }
