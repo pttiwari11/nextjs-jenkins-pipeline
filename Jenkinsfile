@@ -49,10 +49,10 @@ pipeline {
     }
 
     post {
-        always {
-            archiveArtifacts artifacts: '**/build/**'
-            junit 'reports/**/*.xml'
-        }
+        // always {
+        //     archiveArtifacts artifacts: '**/build/**'
+        //     junit 'reports/**/*.xml'
+        // }
         success {
             echo 'Pipeline succeeded!'
         }
