@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/ptiwari11/nextjs-jenkins-pipeline.git'
+                git branch: 'main', url: 'https://github.com/pttiwari11/nextjs-jenkins-pipeline.git'
             }
         }
 
