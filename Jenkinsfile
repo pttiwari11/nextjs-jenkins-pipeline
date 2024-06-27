@@ -71,7 +71,7 @@ pipeline {
                     // SSH into the server to check and install dependencies, and start the application
                     sshagent(['server-ssh-credentials-id']) { // Replace this with your actual SSH credentials ID
                         sh """
-                        ssh ${SERVER_USER}@${SERVER_HOST} '
+                        ssh -i ${server-ssh-credentials-id} ${SERVER_USER}@${SERVER_HOST} '
                         # Check if Node.js is installed, if not, install it
                         if ! command -v node &> /dev/null
                         then
