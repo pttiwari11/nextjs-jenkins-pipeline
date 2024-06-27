@@ -124,10 +124,21 @@ pipeline {
                     sh """
                     mkdir -p ${SERVER_DEPLOY_PATH}
                     rm -rf ${SERVER_DEPLOY_PATH}/*
-                    cp -r .next package.json yarn.lock ${SERVER_DEPLOY_PATH}
+                    cp -r .next static package.json yarn.lock ${SERVER_DEPLOY_PATH}
                     echo ${SERVER_DEPLOY_PATH}
                     cd ${SERVER_DEPLOY_PATH} && yarn install --production
-                    pm2 restart all
+
+                    # Check if pm2 is installed, if not, install it
+                        if ! command -v pm2 &> /dev/null
+                        then
+                            echo "pm2 not found. Installing..."
+                            sudo npm install -g pm2
+                        else
+                            echo "pm2 is already installed."
+                        fi
+                        
+                    pm2 stop all
+                    pm2 start yarn --name "nextjs-jenkins-pipeline" -- start
                     """
                 }
 
