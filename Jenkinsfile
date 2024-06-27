@@ -52,11 +52,11 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'SERVER_USER', variable: 'SERVER_USER'),
                     string(credentialsId: 'SERVER_HOST', variable: 'SERVER_HOST'),
-                    string(credentialsId: 'DEPLOY_PATH', variable: 'DEPLOY_PATH')
+                    string(credentialsId: 'SERVER_DEPLOY_PATH', variable: 'SERVER_DEPLOY_PATH')
                 ]) {
                     // Copy built files to the server
                     sh """
-                    rsync -avz --delete ./ ${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}
+                    rsync -avz --delete ./ ${SERVER_USER}@${SERVER_HOST}:${SERVER_DEPLOY_PATH}
                     """
 
                     // SSH into the server to check and install dependencies, and start the application
@@ -101,7 +101,7 @@ pipeline {
                         fi
 
                         # Navigate to the project directory, install dependencies and restart the application
-                        cd ${DEPLOY_PATH}
+                        cd ${SERVER_DEPLOY_PATH}
                         yarn install
                         pm2 stop all
                         pm2 start yarn --name "nextjs-jenkins-pipeline" -- start
