@@ -65,7 +65,7 @@ pipeline {
 
                     // Copy built files to the server
                     sh """
-                    rsync -avz --delete ./ ${SERVER_USER}@${SERVER_HOST}:${SERVER_DEPLOY_PATH}
+                    rsync -avz --delete -e "ssh -i ${server-ssh-credentials-id}" ./ ${SERVER_USER}@${SERVER_HOST}:${SERVER_DEPLOY_PATH}
                     """
 
                     // SSH into the server to check and install dependencies, and start the application
