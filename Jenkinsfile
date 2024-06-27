@@ -54,6 +54,12 @@ pipeline {
                     string(credentialsId: 'SERVER_HOST', variable: 'SERVER_HOST'),
                     string(credentialsId: 'SERVER_DEPLOY_PATH', variable: 'SERVER_DEPLOY_PATH')
                 ]) {
+
+                    // Add the SSH host key to the known_hosts file
+                    sh """
+                    ssh-keyscan -H ${SERVER_HOST} >> ~/.ssh/known_hosts
+                    """
+
                     // Copy built files to the server
                     sh """
                     rsync -avz --delete ./ ${SERVER_USER}@${SERVER_HOST}:${SERVER_DEPLOY_PATH}
