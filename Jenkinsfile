@@ -137,8 +137,10 @@ pipeline {
                             echo "pm2 is already installed."
                         fi
 
-                    pm2 stop all
-                    pm2 start yarn --name "nextjs-jenkins-pipeline" -- start
+                    yarn build
+                    pm2 start ecosystem.config.js --env production
+                    // pm2 stop all
+                    // pm2 start yarn --name "nextjs-jenkins-pipeline" -- start
                     """
                 }
 
