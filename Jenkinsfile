@@ -132,7 +132,7 @@ pipeline {
                         if ! command -v pm2 &> /dev/null
                         then
                             echo "pm2 not found. Installing..."
-                            sudo npm install -g pm2
+                            npm install -g pm2
                         else
                             echo "pm2 is already installed."
                         fi
