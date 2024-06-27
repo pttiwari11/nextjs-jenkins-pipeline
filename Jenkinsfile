@@ -52,7 +52,8 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'SERVER_USER', variable: 'SERVER_USER'),
                     string(credentialsId: 'SERVER_HOST', variable: 'SERVER_HOST'),
-                    string(credentialsId: 'SERVER_DEPLOY_PATH', variable: 'SERVER_DEPLOY_PATH')
+                    string(credentialsId: 'SERVER_DEPLOY_PATH', variable: 'SERVER_DEPLOY_PATH'),
+                    sshUserPrivateKey(credentialsId: 'server-ssh-credentials-id', keyFileVariable: 'server-ssh-credentials-id')
                 ]) {
 
                     // Ensure .ssh directory exists
