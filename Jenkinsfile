@@ -55,8 +55,10 @@ pipeline {
                     string(credentialsId: 'SERVER_DEPLOY_PATH', variable: 'SERVER_DEPLOY_PATH')
                 ]) {
 
+                    // Ensure .ssh directory exists
                     // Add the SSH host key to the known_hosts file
                     sh """
+                    mkdir -p ~/.ssh
                     ssh-keyscan -H ${SERVER_HOST} >> ~/.ssh/known_hosts
                     """
 
