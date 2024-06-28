@@ -12,6 +12,15 @@ pipeline {
 
     stages {
 
+        stage('Print User and Check Permissions') {
+            steps {
+                script {
+                    sh 'whoami'
+                    sh 'ls -ld /home/metastring/Desktop/testing/server'
+                }
+            }
+        }
+
         stage('Deploy Application') {
             steps {
                 script {
@@ -24,6 +33,8 @@ pipeline {
                     // Copy all files to the deployment directory
                     // sh "cp -r . ${DEPLOY_PATH}"
 
+                    echo "files inside jenkins path"
+
                     // list all files on jenkins repo path
                     sh "ls"
 
@@ -32,8 +43,10 @@ pipeline {
                         // Install production dependencies
                         // sh 'yarn install --production'
 
+                        echo "files inside deploy path"
+
                         // list all files on deploy repo path
-                        sh "ls"
+                        // sh "ls"
                     }
                 }
             }
