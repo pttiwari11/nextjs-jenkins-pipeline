@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        YARN_VERSION = '1.22.21',
+        YARN_VERSION = '1.22.21'
         DEPLOY_PATH = '/home/metastring/Desktop/testing/server/nextjs-jenkins-pipeline'
     }
 
