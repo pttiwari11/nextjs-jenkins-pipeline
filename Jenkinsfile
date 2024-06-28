@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     // Ensure the deployment directory exists
-                    sh "mkdir -p ${DEPLOY_PATH}"
+                    // sh "mkdir -p ${DEPLOY_PATH}"
 
                     // Remove existing files in the deployment directory
                     sh "rm -rf ${DEPLOY_PATH}/*"
